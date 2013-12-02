@@ -46,6 +46,8 @@ public class AddCustomerAccountServlet extends HttpServlet {
         customerAccountDao.addCustomerAccount(customerAccount);
         
         session.setAttribute("customerAccount", customerAccount);
+        session.setAttribute("paymentMessage", "Thanks for joining YouDrive. Please pay your " +
+        		"membership fee below to start using your account");
         
         String forwardAddress = "payBalance.jsp";
         WebPageNavigator.redirect(forwardAddress, response);

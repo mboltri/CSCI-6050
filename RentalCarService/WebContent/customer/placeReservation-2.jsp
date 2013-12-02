@@ -41,15 +41,10 @@
                     <td><fmt:formatNumber type="currency" value="${vehicle.vehicleType.dailyPrice}"/></td>
                     <td>${vehicle.rentalLocation.name}</td>
                     <td>
-                        <form method="get" action="ViewVehicle">
-                            <input type="hidden" name="id" value="${vehicle.id}">
-                            <input type="submit" value="Modify">
-                        </form>
-                    </td>
-                    <td>
-                        <form method="post" action="RemoveVehicle"  onsubmit="return confirm('Do you really want to delete this vehicle?');">
-                            <input type="hidden" name="id" value="${vehicle.id}">
-                            <input type="submit" value="Delete">
+                        <form method="post" action="ViewConfirmationPage">
+                            <input type="hidden" name="vehicleId" value="${vehicle.id}">
+                            
+                            <input type="submit" value="Reserve">
                         </form>
                     </td>
                 </tr>
@@ -57,69 +52,6 @@
         </table>
         
         <br>
-        
-        <h3>Add a vehicle</h3>
-        <form method="post" action="AddVehicle">
-            <table>
-                    <tr>
-                        <td>Make:</td>
-                        <td><input type="text" name="make"></td>
-                    </tr>
-                    <tr>
-                        <td>Model:</td>
-                        <td><input type="text" name="model"></td>
-                    </tr>
-                    <tr>
-                        <td>Year:</td>
-                        <td><input type="text" pattern="\d{4}" name="year"></td>
-                    </tr>
-                    <tr>
-                        <td>Color:</td>
-                        <td><input type="text" name="color"></td>
-                    </tr>
-                    <tr>
-                        <td>License Plate Number:</td>
-                        <td><input type="text" name="licensePlateNumber"></td>
-                    </tr>
-                    <tr>
-                        <td>Mileage:</td>
-                        <td><input type="number" min="0" name="mileage"></td>
-                    </tr>
-                    <tr>
-                        <td>Last service date:</td>
-                        <td><input type="date" name="lastServiceDate"></td>
-                    </tr>
-                    <tr>
-                        <td>Vehicle Condition:</td>
-                        <td><textarea name="vehicleCondition"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>Vehicle Type:</td>
-                        <td>
-                            <select name="vehicleTypeId">
-                                <c:forEach items="${vehicleTypes}" var="vehicleType">
-                                    <option value="${vehicleType.id}">${vehicleType.name}</option>
-                                </c:forEach>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Rental Location:</td>
-                        <td>
-                            <select name="rentalLocationId">
-                                <c:forEach items="${rentalLocations}" var="rentalLocation">
-                                    <option value="${rentalLocation.id}">${rentalLocation.name}</option>
-                                </c:forEach>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><input type="Submit" value="Add Vehicle"></td>
-                    </tr>
-                </table>
-        </form>
-        
-        <br>
-        <a href="adminHome.html">Go back</a>
+        <a href="customerHome.html">Cancel Reservation</a>
     </body>
 </html>

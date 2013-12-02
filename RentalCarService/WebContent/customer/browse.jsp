@@ -10,17 +10,28 @@
 		<style type="text/css">
 			.collapsed { display: none}
 			.expanded { display: table }
+			.toggle { cursor: pointer; color:gray; margin-left:30px }
 		</style>
-		<script type="text/javascript" src="setDates.js">
-			
+		<script type="text/javascript">
+		function vehicleToggle(rentalLocationName) {
+		    var toggle = document.getElementById(rentalLocationName + "_toggle");
+		    var table = document.getElementById(rentalLocationName + "_table");
+		    if (toggle.innerHTML == "Show") {
+		        table.className = "expanded";
+		        toggle.innerHTML = 'Hide';
+		    } else {
+			    table.className = "collapsed";
+			    toggle.innerHTML = 'Show';
+			}
+        }
 		</script>
-		<title>Rental Locations - YouDrive Admin</title>
+		<title>Browse - YouDrive</title>
 	</head>
 	<body>
-        <h2>Active Rental Locations</h2>
+        <h2>Browse Rental Locations and Vehicles</h2>
             <c:forEach items="${rentalLocations}" var="rentalLocation">
 	            <p>${rentalLocation.name}  (${rentalLocation.streetNumber} ${rentalLocation.streetName}, ${rentalLocation.city}, ${rentalLocation.state} ${rentalLocation.zipCode})</p>
-	            <p style="color:gray; margin-left:30px" onclick="vehicleToggle('${rentalLocation.name}')">
+	            <p class="toggle" onclick="vehicleToggle('${rentalLocation.name}')">
 	               <span id="${rentalLocation.name}_toggle">Show</span> vehicles
 	            </p>
                 <table class="collapsed" style="margin-left:30px" id="${rentalLocation.name}_table">

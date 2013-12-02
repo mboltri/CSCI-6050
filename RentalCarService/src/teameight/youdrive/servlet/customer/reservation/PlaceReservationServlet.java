@@ -1,4 +1,4 @@
-package teameight.youdrive.servlet.customer.customeraccount;
+package teameight.youdrive.servlet.customer.reservation;
 
 import java.io.IOException;
 
@@ -10,31 +10,32 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import teameight.youdrive.dbaccess.CustomerAccountAccess;
-import teameight.youdrive.dbaccess.MembershipInformationAccess;
+import teameight.youdrive.dbaccess.ReservationAccess;
 import teameight.youdrive.entity.CustomerAccount;
+import teameight.youdrive.entity.Reservation;
 import teameight.youdrive.util.WebPageNavigator;
 
-@WebServlet("/customer/ExtendMembership")
-public class ExtendMembershipServlet extends HttpServlet {
+@WebServlet("/customer/PlaceReservation")
+public class PlaceReservationServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         HttpSession session = request.getSession();
-        MembershipInformationAccess membershipInformationDao = new MembershipInformationAccess();
+        ReservationAccess reservationDao = new ReservationAccess();
         CustomerAccountAccess customerAccountDao = new CustomerAccountAccess();
-
-        int membershipLength = membershipInformationDao.getMembershipLength();
-        double membershipPrice = membershipInformationDao.getMembershipPrice();
+      
+        Reservation reservation = (Reservation) session.getAttribute("reservation");
+        
+        reservationDao.addReservation(reservation);
         
         CustomerAccount customerAccount = (CustomerAccount) session.getAttribute("customerAccount");
-        customerAccount.extendMembership(membershipPrice, membershipLength);
+        customerAccount.addToBalance(reservation.getCost());
         customerAccountDao.modifyCustomerAccount(customerAccount);
         
-        session.setAttribute("customerAccount", customerAccount);
-        
-        session.setAttribute("paymentMessage", "Your membership has been extended. Please pay the " +
-        		"membership fee now.");
+        session.setAttribute("paymentMessage", "Your reservation was placed successfully. " +
+        		"Please pay the reservation fee now.");
 
         String forwardAddress = "payBalance.jsp";
         WebPageNavigator.redirect(forwardAddress, response);

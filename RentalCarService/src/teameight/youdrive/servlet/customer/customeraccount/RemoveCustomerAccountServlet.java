@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import teameight.youdrive.dbaccess.AccountCredentialsAccess;
 import teameight.youdrive.dbaccess.CustomerAccountAccess;
 import teameight.youdrive.util.WebPageNavigator;
 
@@ -17,11 +18,13 @@ public class RemoveCustomerAccountServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CustomerAccountAccess dao = new CustomerAccountAccess();
+        CustomerAccountAccess customerAccountDao = new CustomerAccountAccess();
+        AccountCredentialsAccess accountCredentialsDao= new AccountCredentialsAccess();
 
         String username = request.getParameter("username");
-        dao.removeCustomerAccount(username);
-
+        customerAccountDao.removeCustomerAccount(username);
+        accountCredentialsDao.removeAccountCredentials(username);
+        
         String forwardAddress = "../index.html";
         WebPageNavigator.redirect(forwardAddress, response);
     }

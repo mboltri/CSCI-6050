@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import teameight.youdrive.entity.AccountCredentials;
 import teameight.youdrive.entity.CustomerAccount;
-import teameight.youdrive.entity.Reservation;
 
 public class CustomerAccountAccess {
 
@@ -169,7 +168,6 @@ public class CustomerAccountAccess {
      * return a CustomerAccount from the database fields
      */
     private CustomerAccount constructCustomerAccountFromResultSet(ResultSet resultSet) {
-        ReservationAccess reservationAccess = new ReservationAccess();
         CustomerAccount customerAccount = null;
 
         try {
@@ -181,12 +179,9 @@ public class CustomerAccountAccess {
             Date   membershipStartDate      = resultSet.getDate("membershipStartDate");
             Date   membershipExpirationDate = resultSet.getDate("membershipExpirationDate");
             double balance                  = resultSet.getDouble("balance");
-            
-            ArrayList<Reservation> reservations = reservationAccess.getReservationsByCustomer(username);
 
             customerAccount = new CustomerAccount(username, firstName, lastName, 
-                    driversLicenseNumber, membershipStartDate, membershipExpirationDate, balance,
-                    reservations);
+                    driversLicenseNumber, membershipStartDate, membershipExpirationDate, balance);
 
         } catch (SQLException e) {
             e.printStackTrace();

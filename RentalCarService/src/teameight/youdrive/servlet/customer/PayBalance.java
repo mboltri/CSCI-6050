@@ -30,6 +30,14 @@ public class PayBalance extends HttpServlet {
         
         dao.modifyCustomerAccount(customerAccount);
         
+        String paymentMessage = null;
+        if(customerAccount.getBalance() <= 0) {
+            paymentMessage = "All fees on your account have been paid.";
+        } else {
+            paymentMessage = "You have an unpaid balance on your account.";
+        }
+        session.setAttribute("paymentMessage", paymentMessage);
+        
         String forwardAddress = "accountDetails.jsp";
         WebPageNavigator.redirect(forwardAddress, response);
     }

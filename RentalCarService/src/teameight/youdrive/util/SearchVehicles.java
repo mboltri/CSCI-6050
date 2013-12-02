@@ -1,11 +1,12 @@
 package teameight.youdrive.util;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import teameight.youdrive.dbaccess.VehicleAccess;
-import teameight.youdrive.entity.RentalLocation;
+import teameight.youdrive.entity.Reservation;
 import teameight.youdrive.entity.Vehicle;
 
 public class SearchVehicles {
@@ -43,15 +44,58 @@ public class SearchVehicles {
 	
 	}
 	
-	public static List<Vehicle> findAvaialableVehicles(int locationId, Date start, Date end) {
-	    List<Vehicle> matches = new ArrayList<Vehicle>();
-	    VehicleAccess dao = new VehicleAccess();
+	public static List<Vehicle> findAvaialableVehicles(List<Vehicle> vehicles, 
+	        List<Reservation> reservations, int rentalLocationId, Timestamp startDate, Timestamp endDate) {
 	    
-	    List<Vehicle> vehicles = dao.getVehiclesByLocation(locationId);
+	    List<Vehicle> matches = new ArrayList<Vehicle>();
+	    
+	    Map<Vehicle, List<Reservation>> reservationsMap = buildVehicleReservationMap(reservations); 
+	    
 	    for(Vehicle vehicle : vehicles) {
-	        //TODO look at each vehicle's reservations and compare to start and end date to determine if it is available
+	        
+	        List<Reservation> vehicleReservations = reservationsMap.get(vehicle);
+	        
+	        if(isVehicleAtLocation(vehicle, rentalLocationId) && !isConflict(startDate, endDate, vehicleReservations)) {
+	            matches.add(vehicle);
+	        }
 	    }
 	    
 	    return matches;
+	}
+	
+	private static boolean isVehicleAtLocation(Vehicle vehicle, int rentalLocationId) {
+	    return vehicle.getRentalLocation().getId() == rentalLocationId;
+	}
+	
+	private static boolean isConflict(Timestamp startDate, Timestamp endDate, List<Reservation> reservations) {
+	    if(reservations == null || reservations.isEmpty()) {
+	        return false;
+	    }
+	    
+	    for(Reservation reservation : reservations) {
+	        Timestamp reservationStart  = reservation.getStartDate();
+	        Timestamp reservationEnd    = reservation.getEndDate();
+	        if(startDate.after(reservationStart) || endDate.before(reservationEnd)) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+	
+	private static Map<Vehicle, List<Reservation>> buildVehicleReservationMap(List<Reservation> reservations) {
+	    
+	    Map<Vehicle, List<Reservation>> map = new HashMap<Vehicle, List<Reservation>>();
+	    
+	    for(Reservation reservation : reservations) {
+	        Vehicle vehicle = reservation.getVehicle();
+	        List<Reservation> vehicleReservations = map.get(vehicle);
+	        if(vehicleReservations == null) { 
+	            vehicleReservations = new ArrayList<Reservation>(); 
+	        }
+	        vehicleReservations.add(reservation);
+	        map.put(vehicle, vehicleReservations);
+	    }
+	    
+	    return map;
 	}
 }

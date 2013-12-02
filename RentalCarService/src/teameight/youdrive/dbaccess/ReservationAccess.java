@@ -1,11 +1,11 @@
 package teameight.youdrive.dbaccess;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import teameight.youdrive.entity.CustomerAccount;
@@ -153,10 +153,10 @@ public class ReservationAccess {
                     + "VALUES (?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
 
-            statement.setDate   (1, reservation.getStartDate());
-            statement.setDate   (2, reservation.getEndDate());
-            statement.setString (3, reservation.getReservationist().getUsername());
-            statement.setInt    (4, reservation.getVehicle().getId());
+            statement.setTimestamp   (1, reservation.getStartDate());
+            statement.setTimestamp   (2, reservation.getEndDate());
+            statement.setString     (3, reservation.getReservationist().getUsername());
+            statement.setInt        (4, reservation.getVehicle().getId());
 
             statement.executeUpdate();
 
@@ -179,11 +179,11 @@ public class ReservationAccess {
                     + "WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(query);
 
-            statement.setDate   (1, reservation.getStartDate());
-            statement.setDate   (2, reservation.getEndDate());
-            statement.setString (3, reservation.getReservationist().getUsername());
-            statement.setInt    (4, reservation.getVehicle().getId());;
-            statement.setInt    (5, reservation.getId());
+            statement.setTimestamp  (1, reservation.getStartDate());
+            statement.setTimestamp  (2, reservation.getEndDate());
+            statement.setString     (3, reservation.getReservationist().getUsername());
+            statement.setInt        (4, reservation.getVehicle().getId());;
+            statement.setInt        (5, reservation.getId());
 
             statement.executeUpdate();
 
@@ -224,11 +224,11 @@ public class ReservationAccess {
 
         try {
 
-            int     id               = resultSet.getInt("id");
-            Date    startDate        = resultSet.getDate("startDate");
-            Date    endDate          = resultSet.getDate("endDate");
-            String  customerUsername = resultSet.getString("customerUsername");
-            int     vehicleId        = resultSet.getInt("vehicleId");
+            int         id               = resultSet.getInt("id");
+            Timestamp   startDate        = resultSet.getTimestamp("startDate");
+            Timestamp   endDate          = resultSet.getTimestamp("endDate");
+            String      customerUsername = resultSet.getString("customerUsername");
+            int         vehicleId        = resultSet.getInt("vehicleId");
             
             CustomerAccount reservationist = customerAccountAccess.getCustomerAccount(customerUsername);
             Vehicle vehicle = vehicleAccess.getVehicle(vehicleId);

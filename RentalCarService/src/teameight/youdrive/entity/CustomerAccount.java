@@ -1,7 +1,6 @@
 package teameight.youdrive.entity;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class CustomerAccount {
@@ -13,18 +12,10 @@ public class CustomerAccount {
 	private Date membershipExpirationDate;
 	private double balance;
 	private String status; //active, inactive
-    private ArrayList<Reservation> reservations;
 
     public CustomerAccount(String username, String firstName, String lastName,
             String driversLicenseNumber, Date membershipStartDate, Date membershipExpirationDate,
             double balance) {
-        this(username, firstName, lastName, driversLicenseNumber, membershipStartDate,
-                membershipExpirationDate, balance, new ArrayList<Reservation>());
-    }
-
-    public CustomerAccount(String username, String firstName, String lastName,
-            String driversLicenseNumber, Date membershipStartDate, Date membershipExpirationDate,
-            double balance, ArrayList<Reservation> reservations) {
         super();
         this.username = username;
         this.firstName = firstName;
@@ -34,7 +25,6 @@ public class CustomerAccount {
         this.membershipExpirationDate = membershipExpirationDate;
         this.balance = balance;
         this.status = getMembershipStatus();
-        this.reservations = reservations;
     }
 
 
@@ -70,11 +60,21 @@ public class CustomerAccount {
     public String getStatus() {
         return status;
     }
-
-    public ArrayList<Reservation> getReservations() {
-		return reservations;
-	}
     
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setDriversLicenseNumber(String driversLicenseNumber) {
+        this.driversLicenseNumber = driversLicenseNumber;
+    }
+
+
+
     public void extendMembership(double membershipPrice, int numberOfDays) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(membershipExpirationDate);
@@ -82,6 +82,16 @@ public class CustomerAccount {
         membershipExpirationDate = new Date(calendar.getTime().getTime());
         balance += membershipPrice;
     }
+
+    public void addToBalance(double amount) {
+        balance += amount;
+    }
+
+    public void pay(double paymentAmount) {
+        balance -= paymentAmount;
+    }
+
+
 
     private String getMembershipStatus() {
         String status = "";
@@ -95,29 +105,15 @@ public class CustomerAccount {
         
         return status;
     }
-    
-    public static Date calculateExpirationDate(Date startDate, int lengthOfMembership) {
 
+
+
+    public static Date calculateExpirationDate(Date startDate, int lengthOfMembership) {
+    
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(startDate);
         calendar.add(Calendar.DATE, lengthOfMembership);  
         return new Date(calendar.getTime().getTime());
-    }
-
-    public void pay(double paymentAmount) {
-        balance -= paymentAmount;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setDriversLicenseNumber(String driversLicenseNumber) {
-        this.driversLicenseNumber = driversLicenseNumber;
     }
 
 }

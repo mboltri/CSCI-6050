@@ -10,10 +10,9 @@
         <title>Pay account balance</title>
     </head>
     <body>
-        <h2>Pay your account balance</h2>
+        <h2>${paymentMessage}</h2>
         <p>
-            Your account has a balance of <fmt:formatNumber type="currency" value="${customerAccount.balance}"/>. 
-            You will not be able to place a reservation on a vehicle until the balance is paid.
+            Your account has a balance of <fmt:formatNumber type="currency" value="${customerAccount.balance}"/>..
         </p>
         <form method="post" action="PayBalance">
             <table>

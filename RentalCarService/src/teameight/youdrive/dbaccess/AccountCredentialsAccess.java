@@ -114,4 +114,8 @@ public class AccountCredentialsAccess {
         }
     }
 
+    public void removeAccountCredentials(AccountCredentials account) {
+        removeAccountCredentials(account.getUsername());
+    }
+
 }

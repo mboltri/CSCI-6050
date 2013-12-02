@@ -24,9 +24,7 @@ public class RemoveAccountCredentials extends HttpServlet {
         AccountCredentialsAccess dao= new AccountCredentialsAccess();
 
         AccountCredentials account = (AccountCredentials)session.getAttribute("accountCredentials");
-        String username = account.getUsername();
-        
-        dao.removeAccountCredentials(username);
+        dao.removeAccountCredentials(account);
         
         String forwardAddress = "../index.html";
         WebPageNavigator.redirect(forwardAddress, response);
