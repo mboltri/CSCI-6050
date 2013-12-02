@@ -17,4 +17,10 @@ public class DateFormatter {
         String dateString = sdf.format(date);
         return dateString;
     }
+    
+    public static Date stringToDatetime(String datetimeString) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+        java.util.Date date = sdf.parse(datetimeString);
+        return new Date(date.getTime());
+    }
 }

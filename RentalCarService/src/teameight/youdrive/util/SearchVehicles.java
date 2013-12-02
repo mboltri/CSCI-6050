@@ -1,8 +1,11 @@
 package teameight.youdrive.util;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import teameight.youdrive.dbaccess.VehicleAccess;
+import teameight.youdrive.entity.RentalLocation;
 import teameight.youdrive.entity.Vehicle;
 
 public class SearchVehicles {
@@ -38,5 +41,17 @@ public class SearchVehicles {
 
 		return responseSet;
 	
+	}
+	
+	public static List<Vehicle> findAvaialableVehicles(int locationId, Date start, Date end) {
+	    List<Vehicle> matches = new ArrayList<Vehicle>();
+	    VehicleAccess dao = new VehicleAccess();
+	    
+	    List<Vehicle> vehicles = dao.getVehiclesByLocation(locationId);
+	    for(Vehicle vehicle : vehicles) {
+	        //TODO look at each vehicle's reservations and compare to start and end date to determine if it is available
+	    }
+	    
+	    return matches;
 	}
 }

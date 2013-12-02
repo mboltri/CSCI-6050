@@ -11,18 +11,8 @@
 			.collapsed { display: none}
 			.expanded { display: table }
 		</style>
-		<script type="text/javascript">
-			function vehicleToggle(rentalLocationName) {
-				var toggle = document.getElementById(rentalLocationName + "_toggle");
-				var table = document.getElementById(rentalLocationName + "_table");
-				if (toggle.innerHTML == "Show") {
-					table.className = "expanded";
-					toggle.innerHTML = 'Hide';
-				} else {
-					table.className = "collapsed";
-					toggle.innerHTML = 'Show';
-				}
-			}
+		<script type="text/javascript" src="setDates.js">
+			
 		</script>
 		<title>Rental Locations - YouDrive Admin</title>
 	</head>

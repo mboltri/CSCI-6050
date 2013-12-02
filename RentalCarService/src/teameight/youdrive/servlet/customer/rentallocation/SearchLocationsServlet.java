@@ -43,7 +43,7 @@ public class SearchLocationsServlet extends HttpServlet {
 
         request.setAttribute("rentalLocations", searchList);
 
-        String forwardAddress = "/customer/locationSearchResults.jsp";
+        String forwardAddress = "locationSearchResults.jsp";
         WebPageNavigator.forward(forwardAddress, request, response);
 	}
 }

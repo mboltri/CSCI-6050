@@ -45,7 +45,7 @@ public class SearchVehiclesServlet extends HttpServlet {
 
         request.setAttribute("vehicles", searchList);
 
-        String forwardAddress = "/customer/vehicleSearchResults.jsp";
+        String forwardAddress = "vehicleSearchResults.jsp";
         WebPageNavigator.forward(forwardAddress, request, response);
 	}
 }

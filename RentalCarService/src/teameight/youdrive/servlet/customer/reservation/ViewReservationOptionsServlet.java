@@ -1,4 +1,4 @@
-package teameight.youdrive.servlet.customer.rentallocation;
+package teameight.youdrive.servlet.customer.reservation;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,27 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import teameight.youdrive.dbaccess.LocationAccess;
-import teameight.youdrive.dbaccess.VehicleAccess;
 import teameight.youdrive.entity.RentalLocation;
-import teameight.youdrive.entity.Vehicle;
 import teameight.youdrive.util.WebPageNavigator;
 
-@WebServlet("/customer/Browse")
-public class BrowseServlet extends HttpServlet {
+@WebServlet("/customer/ViewReservationOptions")
+public class ViewReservationOptionsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        LocationAccess locationDao = new LocationAccess();
-        VehicleAccess  vehicleDao  = new VehicleAccess();
+        LocationAccess dao = new LocationAccess();
 
-        ArrayList<RentalLocation> rentalLocations = locationDao.getRentalLocations();
+        ArrayList<RentalLocation> rentalLocations = dao.getRentalLocations();
         request.setAttribute("rentalLocations", rentalLocations);
-        
-        ArrayList<Vehicle> vehicles = vehicleDao.getVehicles();
-        request.setAttribute("vehicles", vehicles);
 
-        String forwardAddress = "browse.jsp";
+        String forwardAddress = "placeReservation-1.jsp";
         WebPageNavigator.forward(forwardAddress, request, response);
     }
 
