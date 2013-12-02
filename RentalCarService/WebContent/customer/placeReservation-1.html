@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <title>Place Reservation - YouDrive</title>
+    </head>
+    <body>
+        <h2>Select your reservation date and time</h2>
+        <form method="get" action="FindAvailableVehicles">
+            <table>
+                <tr>
+                    <td>Start date: </td>
+                    <td><input type="date" name="startDate" required></td>
+                </tr>
+                <tr>
+                    <td>Start time: </td>
+                    <td><input type="time" name="startTime" required></td>
+                </tr>
+                <tr>
+                    <td>End date: </td>
+                    <td><input type="date" name="endDate" required></td>
+                </tr>
+                <tr>
+                    <td>End time: </td>
+                    <td><input type="time" name="endTime" required></td>
+                </tr>
+                <tr>
+                    <td>Location: </td>
+                    <td>
+                        <select name="location">
+                            <!-- TODO -->
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Find Available Vehicles"></td>
+                </tr>
+            </table>
+            
+            <a href="/Rental_Car_Service/index.html">Go back</a>
+        </form>
+    </body>
+</html>
