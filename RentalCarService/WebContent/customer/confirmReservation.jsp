@@ -18,10 +18,10 @@
         </p>
         <p> 
             The reservation will begin at 
-            <fmt:formatDate type="time" pattern="h:mm a" value="${reservation.startDate}" /> on 
-            <fmt:formatDate type="date"                   value="${reservation.startDate}" /> and will end at 
-            <fmt:formatDate type="time" pattern="h:mm a" value="${reservation.endDate}" /> on 
-            <fmt:formatDate type="date"                   value="${reservation.endDate}" />.
+            <fmt:formatDate type="time" value="${reservation.startDate}" pattern="h:mm a" /> on 
+            <fmt:formatDate type="date" value="${reservation.startDate}" /> and will end at 
+            <fmt:formatDate type="time" value="${reservation.endDate}" pattern="h:mm a" /> on 
+            <fmt:formatDate type="date" value="${reservation.endDate}" />.
         </p>
         <p>
             The cost of this rental will be <fmt:formatNumber type="currency" value="${reservation.cost}" />.

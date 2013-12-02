@@ -241,4 +241,8 @@ public class ReservationAccess {
 
         return reservation;
     }
+
+    public ArrayList<Reservation> getReservationsByCustomer(CustomerAccount customerAccount) {
+        return getReservationsByCustomer(customerAccount.getUsername());
+    }
 }
