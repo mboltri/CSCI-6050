@@ -4,6 +4,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Modify Vehicle Type - YouDrive Admin</title>
+		<link rel="stylesheet" href="styles.css" type="text/css" media="screen" />
 	</head>
 	<body>
 		<h2>Modifying Vehicle Type <i>${vehicleType.name}</i></h2>
