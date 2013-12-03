@@ -8,6 +8,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Your Account - YouDrive</title>
+        <link rel="stylesheet" href="styles.css" type="text/css" media="screen" />
     </head>
     <body>
         <h2>Your Account Details</h2>

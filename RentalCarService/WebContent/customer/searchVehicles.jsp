@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Vehicle Search - YouDrive</title>
+<link rel="stylesheet" href="styles.css" type="text/css" media="screen" />
 </head>
 <body>
 	<h2>Search for Vehicles</h2>
