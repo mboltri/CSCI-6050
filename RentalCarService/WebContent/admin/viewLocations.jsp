@@ -8,7 +8,6 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Rental Locations - YouDrive Admin</title>
-		<link rel="stylesheet" href="styles.css" type="text/css" media="screen" />
 	</head>
 	<body>
 		<h2>Active Rental Locations</h2>
@@ -49,13 +48,23 @@
 						<td><input type="text" name="name"></td>
 					</tr>
 					<tr>
-						<td>Address:</td>
-						<td>Street number, name: <input type="text" name="streetNumber" style="width: 40px"></input></td>
-						<td><input type="text" name="streetName"></input></td>
-						<td>City, State: <input type="text" name="city" style="width: 100px"></input></td>
-						<td><input type="text" name="state" style="width: 40px"></input></td>
-						<td>Zip: <input type="text" pattern="\d{5}" name="zipCode"></input></td>
+						<td>Street number: </td>
+						<td><input type="text" name="streetNumber" style="width: 40px"></td>
 					</tr>
+                        <td>Street name: </td>
+                        <td><input type="text" name="streetName"></td>
+					<tr>
+                        <td>City: </td>
+                        <td><input type="text" name="city"></td>
+					</tr>
+					<tr>
+                        <td>State: </td>
+                        <td><input type="text" name="state" style="width: 40px"></td>
+					</tr>
+                    <tr>
+                        <td>Zip code: </td>
+                        <td><input type="text" pattern="\d{5}" name="zipCode"></td>
+                    </tr>
 					<tr>
 						<td>Vehicle Capacity:</td>
 						<td><input type="number" min=0 name="capacity"></td>
