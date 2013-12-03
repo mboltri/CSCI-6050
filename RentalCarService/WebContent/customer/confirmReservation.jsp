@@ -9,6 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Place Reservation - YouDrive</title>
         <script type="text/javascript" src="setDate.js"></script>
+        <link rel="stylesheet" href="styles.css" type="text/css" media="screen" />
     </head>
     <body onload="setDates()">
         <h2>Review the details of your reservation below.</h2>
