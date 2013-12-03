@@ -8,6 +8,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Rental Locations - YouDrive Admin</title>
+        <link rel="stylesheet" href="styles.css" type="text/css" media="screen" />
 	</head>
 	<body>
 		<h2>Active Rental Locations</h2>
