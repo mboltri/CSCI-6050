@@ -59,6 +59,6 @@
         </table>
         
         <br>
-        <a href="customerHome.html">Go back</a>
+        <a href="adminHome.html">Go back</a>
     </body>
 </html>
