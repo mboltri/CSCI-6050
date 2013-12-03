@@ -47,7 +47,7 @@ public class FindAvailableVehiclesServlet extends HttpServlet {
 
         String forwardAddress = "viewAccountDetails.jsp";
         if(!endDate.after(startDate)) {
-            forwardAddress = "placeReservation-1.jsp";
+            forwardAddress = "ViewReservationOptions";
         } else {
             forwardAddress = "placeReservation-2.jsp";
             int rentalLocationId = Integer.parseInt(request.getParameter("rentalLocationId"));
