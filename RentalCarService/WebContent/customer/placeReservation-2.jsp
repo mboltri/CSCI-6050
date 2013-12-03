@@ -8,12 +8,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<<<<<<< HEAD
         <title>Place Reservation - YouDrive</title>
-=======
         <title>Vehicles - YouDrive Admin</title>
         <link rel="stylesheet" href="styles.css" type="text/css" media="screen" />
->>>>>>> 22eee69190bd4b77e0121b141ea8580c66a277a1
     </head>
     <body>
         <c:choose>

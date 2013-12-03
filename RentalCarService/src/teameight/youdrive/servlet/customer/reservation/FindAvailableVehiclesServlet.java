@@ -44,19 +44,24 @@ public class FindAvailableVehiclesServlet extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        
-        int rentalLocationId = Integer.parseInt(request.getParameter("rentalLocationId"));
-        
-        ArrayList<Vehicle> vehicles = vehicleDao.getVehicles();
-        ArrayList<Reservation> reservations = reservationDao.getReservations();
-        List<Vehicle> availableVehicles = SearchVehicles.findAvaialableVehicles(
-                vehicles, reservations, rentalLocationId, startDate, endDate);
-        
-        session.setAttribute("start", startDate);
-        session.setAttribute("end", endDate);
-        request.setAttribute("vehicles", availableVehicles);
 
-        String forwardAddress = "placeReservation-2.jsp";
+        String forwardAddress = "viewAccountDetails.jsp";
+        if(!endDate.after(startDate)) {
+            forwardAddress = "placeReservation-1.jsp";
+        } else {
+            forwardAddress = "placeReservation-2.jsp";
+            int rentalLocationId = Integer.parseInt(request.getParameter("rentalLocationId"));
+            
+            ArrayList<Vehicle> vehicles = vehicleDao.getVehicles();
+            ArrayList<Reservation> reservations = reservationDao.getReservations();
+            List<Vehicle> availableVehicles = SearchVehicles.findAvaialableVehicles(
+                    vehicles, reservations, rentalLocationId, startDate, endDate);
+            
+            session.setAttribute("start", startDate);
+            session.setAttribute("end", endDate);
+            request.setAttribute("vehicles", availableVehicles);
+        }
+
         WebPageNavigator.forward(forwardAddress, request, response);
 	}
 

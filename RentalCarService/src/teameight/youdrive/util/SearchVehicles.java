@@ -54,8 +54,6 @@ public class SearchVehicles {
 	    for(Vehicle vehicle : vehicles) {
 	        
 	        List<Reservation> vehicleReservations = reservationsMap.get(vehicle.getId());
-	        System.out.println(vehicle.getMake() + " " + vehicle.getModel());
-	        System.out.println(vehicleReservations);
 	        if(isVehicleAtLocation(vehicle, rentalLocationId) && !isConflict(startDate, endDate, vehicleReservations)) {
 	            matches.add(vehicle);
 	        }
@@ -96,15 +94,12 @@ public class SearchVehicles {
 	    for(Reservation reservation : reservations) {
 	        Vehicle vehicle = reservation.getVehicle();
 
-            System.out.println("reservation " + reservation.getId() + ": " + vehicle.getId() );
 	        List<Reservation> vehicleReservations = map.get(vehicle);
-	        System.out.println("vehicle " + vehicle.getId() + " map entry: " + map.get(vehicle));
 	        if(vehicleReservations == null) { 
 	            vehicleReservations = new ArrayList<Reservation>(); 
 	        }
 	        vehicleReservations.add(reservation);
 	        map.put(vehicle.getId(), vehicleReservations);
-	        System.out.println("vehicle " + vehicle.getId() + " map entry (2): " + map.get(vehicle.getId()));
 	    }
 	    
 	    return map;
