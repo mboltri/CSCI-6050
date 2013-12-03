@@ -17,17 +17,19 @@
         <form method="post" action="LogIn">
             <table>
                 <tr>
-                    <td>Username: </td>
-                    <td><input type="text" name="username" required></td>
+                    <td width = "50%">Username: </td>
+                    <td width = "50%"><input size = "100%" type="text" name="username" required></td>
                 </tr>
                 <tr>
                     <td>Password: </td>
-                    <td><input type="password" name="password" required></td>
+                    <td><input size = "100%" type="password" name="password" required></td>
                 </tr>
                 <tr>
                     <td><input type="submit" value="Log In"></td>
                 </tr>
             </table>
+            
+            <p><center><img src="images/Car Logos.jpg" width="400" height="338" /></center></p>
         </form>
     </body>
 </html>
