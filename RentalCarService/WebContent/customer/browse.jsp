@@ -7,6 +7,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<link rel="stylesheet" href="styles.css" type="text/css" media="screen" />
 		<style type="text/css">
 			.collapsed { display: none}
 			.expanded { display: table }
