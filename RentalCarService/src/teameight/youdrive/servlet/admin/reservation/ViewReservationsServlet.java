@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import teameight.youdrive.dbaccess.MembershipInformationAccess;
 import teameight.youdrive.dbaccess.ReservationAccess;
 import teameight.youdrive.entity.Reservation;
 import teameight.youdrive.util.WebPageNavigator;
@@ -21,10 +22,13 @@ public class ViewReservationsServlet extends HttpServlet {
             throws ServletException, IOException {
         
         ReservationAccess reservationDao = new ReservationAccess();
-      
-        ArrayList<Reservation> reservations = reservationDao.getReservations();
+        MembershipInformationAccess membershipInformationDao = new MembershipInformationAccess();
         
+        ArrayList<Reservation> reservations = reservationDao.getReservations();
         request.setAttribute("reservations", reservations);
+        
+        double reservationCancellationFee = membershipInformationDao.getReservationCancellationFee();
+        request.setAttribute("reservationCancellationFee", reservationCancellationFee);
         
         String forwardAddress = "viewReservations.jsp";
         WebPageNavigator.forward(forwardAddress, request, response);

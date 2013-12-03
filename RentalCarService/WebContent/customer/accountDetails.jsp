@@ -36,6 +36,6 @@
         </form>
   
         <br>
-        <a href="customerHome.html">Go back</a>
+        <a href="customerHome.html">Home</a>
     </body>
 </html>

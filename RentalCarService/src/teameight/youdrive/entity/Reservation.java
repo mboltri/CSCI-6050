@@ -58,8 +58,13 @@ public class Reservation {
 	    return cost;
 	}
 	
+	public boolean isWithinOneDay(Timestamp date) {
+	    int totalHours = (int) ((startDate.getTime() - date.getTime()) / ADJUSTMENT_FACTOR);
+	    return totalHours >= 24;
+	}
+	
 	private void setStatus() {
-	    Date now = new Date(System.currentTimeMillis());
+	    Timestamp now = new Timestamp(System.currentTimeMillis());
 	    if(now.before(startDate)) {
 	        status = "placed";
 	    } else if(now.before(endDate)) {

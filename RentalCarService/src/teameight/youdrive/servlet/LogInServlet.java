@@ -46,15 +46,20 @@ public class LogInServlet extends HttpServlet {
             
             if(accountCredentials.getRole().equals("customer")) { //user is a customer
                 forwardAddress = "customer/customerHome.html";
+                session.setAttribute("logInErrorMessage", null);
             } else if (accountCredentials.getRole().equals("admin")) { //user is an admin
                 forwardAddress = "admin/adminHome.html";
+                session.setAttribute("logInErrorMessage", null);
             } else { //user has an unknown role type (this shouldn't happen)
-                forwardAddress = "index.html";
+                forwardAddress = "index.jsp";
+                session.setAttribute("logInErrorMessage", "Your account has an unknown role type. " +
+                		"Please contact YouDrive support for help with this error.");
             }
             
         } else { //user's credentials were not correct
-            //TODO bad credentials error message
-            forwardAddress = "index.html";
+            session.setAttribute("logInErrorMessage", "Invalid username/password combination. Please " +
+            		"try again (remember that password is case sensitive).");
+            forwardAddress = "index.jsp";
         }
         WebPageNavigator.redirect( forwardAddress, response );
     }

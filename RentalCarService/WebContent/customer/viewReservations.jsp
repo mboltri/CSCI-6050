@@ -39,8 +39,8 @@
                         		'Do you really want to cancel this reservation? If the reservation ' +
                         		'is scheduled to start in less than 24 hours, you will be assessed a ' + 
                         		'cancellation fee.');">
-                            <input type="hidden" name="id" value="${vehicle.id}">
-                            <input type="submit" value="Delete">
+                            <input type="hidden" name="reservationId" value="${reservation.id}">
+                            <input type="submit" value="Cancel Reservation">
                         </form>
                     </td>
                 </tr>

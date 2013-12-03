@@ -71,9 +71,34 @@ public class MembershipInformationAccess {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } 
 
         return membershipLength;
+
+    }
+    
+    public double getReservationCancellationFee() {
+        double reservationCancellationFee = 1.0;
+        try {
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            String query = "SELECT reservationCancellationFee FROM membershipInformation";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            ResultSet resultSet = statement.executeQuery();
+           
+            resultSet.next();
+
+            reservationCancellationFee = resultSet.getDouble("reservationCancellationFee");
+
+            statement.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return reservationCancellationFee;
 
     }
 
@@ -113,6 +138,27 @@ public class MembershipInformationAccess {
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setInt(1, numberOfDays);
+
+            statement.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+    
+    public boolean modifyReservationCancellationFee(double reservationCancellationFee) {
+
+        try {
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            String query = "UPDATE membershipInformation SET reservationCancellationFee=?";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            statement.setDouble (1, reservationCancellationFee);
 
             statement.executeUpdate();
 

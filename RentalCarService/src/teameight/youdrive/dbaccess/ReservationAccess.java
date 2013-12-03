@@ -85,6 +85,10 @@ public class ReservationAccess {
 
     }
     
+    public ArrayList<Reservation> getReservationsByCustomer(CustomerAccount customerAccount) {
+        return getReservationsByCustomer(customerAccount.getUsername());
+    }
+
     public ArrayList<Reservation> getReservationsByVehicle(int vehicleId) {
         ArrayList<Reservation> reservations = new ArrayList<Reservation>();
         try {
@@ -213,6 +217,24 @@ public class ReservationAccess {
         }
     }
 
+    public void removeReservation(Reservation reservation) {
+        removeReservation(reservation.getId());
+    }
+
+    public void removeReservationsByCustomer(String customerUsername) {
+        try {
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+    
+            String query = "delete from reservation where customerUsername=?";
+            PreparedStatement statement = connection.prepareStatement(query);
+    
+            statement.setString(1, customerUsername);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Given a result set retrieved from the MySQL database, instantiate and
      * return a Reservation from the database fields
@@ -240,9 +262,5 @@ public class ReservationAccess {
         }
 
         return reservation;
-    }
-
-    public ArrayList<Reservation> getReservationsByCustomer(CustomerAccount customerAccount) {
-        return getReservationsByCustomer(customerAccount.getUsername());
     }
 }

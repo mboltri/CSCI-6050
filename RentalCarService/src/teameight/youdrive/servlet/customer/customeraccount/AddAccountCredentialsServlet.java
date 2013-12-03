@@ -32,8 +32,8 @@ public class AddAccountCredentialsServlet extends HttpServlet {
         String forwardAddress = null;
         if(!password.equals(passwordConfirm)) { //user's passwords did not match
             
-            //TODO non-matching passwords error message
-            forwardAddress = "createAccount-1.html";
+            session.setAttribute("accountCreationErrorMessage", "The passwords you entered did not match.");
+            forwardAddress = "createAccount-1.jsp";
             
         } else { //passwords match
             
@@ -41,6 +41,7 @@ public class AddAccountCredentialsServlet extends HttpServlet {
             boolean addCredentialsSuccessful = accountCredentialsDao.addAccountCredentials(accountCredentials);
             
             if(addCredentialsSuccessful) {
+                session.setAttribute("accountCreationErrorMessage", null);
                 session.setAttribute("accountCredentials", accountCredentials);
                 
                 double membershipPrice = membershipInformationDao.getMembershipPrice();
@@ -48,8 +49,11 @@ public class AddAccountCredentialsServlet extends HttpServlet {
                 
                 forwardAddress = "createAccount-2.jsp";
             } else { //user's credentials could not be added to the database
-                //TODO non-matching passwords error message
-                forwardAddress = "createAccount-1.html";
+
+                session.setAttribute("accountCreationErrorMessage", "There was an error creating " +
+                		"your account. This is probably because the username you chose has already " +
+                		"been taken.");
+                forwardAddress = "createAccount-1.jsp";
             }
             
         }

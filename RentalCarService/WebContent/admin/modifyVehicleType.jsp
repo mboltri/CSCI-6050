@@ -18,7 +18,7 @@
 					<td>$<input type="number" min="0" step="0.01" name="hourlyPrice" value="${vehicleType.hourlyPrice}"></td>
 				</tr>
 				<tr>
-					<td>Street Name:</td>
+					<td>Daily price:</td>
 					<td>$<input type="number" min="0" step="0.01" name="dailyPrice" value="${vehicleType.dailyPrice}"></td>
 				</tr>
 				<tr>

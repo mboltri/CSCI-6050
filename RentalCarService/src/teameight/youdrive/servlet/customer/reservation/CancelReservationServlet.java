@@ -1,6 +1,7 @@
 package teameight.youdrive.servlet.customer.reservation;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,13 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import teameight.youdrive.dbaccess.CustomerAccountAccess;
+import teameight.youdrive.dbaccess.MembershipInformationAccess;
 import teameight.youdrive.dbaccess.ReservationAccess;
 import teameight.youdrive.entity.CustomerAccount;
 import teameight.youdrive.entity.Reservation;
 import teameight.youdrive.util.WebPageNavigator;
 
-@WebServlet("/customer/PlaceReservation")
-public class PlaceReservationServlet extends HttpServlet {
+@WebServlet("/customer/CancelReservation")
+public class CancelReservationServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -25,19 +27,24 @@ public class PlaceReservationServlet extends HttpServlet {
         HttpSession session = request.getSession();
         ReservationAccess reservationDao = new ReservationAccess();
         CustomerAccountAccess customerAccountDao = new CustomerAccountAccess();
-      
-        Reservation reservation = (Reservation) session.getAttribute("reservation");
+        MembershipInformationAccess membershipInformationDao = new MembershipInformationAccess();
         
-        reservationDao.addReservation(reservation);
+        int reservationId = Integer.parseInt(request.getParameter("reservationId"));
+        Reservation reservation = reservationDao.getReservation(reservationId);
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        boolean shouldAssessFee = reservation.isWithinOneDay(now);
         
-        CustomerAccount customerAccount = (CustomerAccount) session.getAttribute("customerAccount");
-        customerAccount.assessFee(reservation.getCost());
-        customerAccountDao.modifyCustomerAccount(customerAccount);
+        reservationDao.removeReservation(reservation);
         
-        session.setAttribute("paymentMessage", "Your reservation was placed successfully. " +
-        		"Please pay the reservation fee now.");
+        if(shouldAssessFee) {
+            CustomerAccount customerAccount = (CustomerAccount) session.getAttribute("customerAccount");
+            double cancellationFee = membershipInformationDao.getReservationCancellationFee();
+            customerAccount.assessFee(cancellationFee);
+            
+            customerAccountDao.modifyCustomerAccount(customerAccount);
+        }
 
-        String forwardAddress = "payBalance.jsp";
+        String forwardAddress = "ViewCustomerReservations";
         WebPageNavigator.redirect(forwardAddress, response);
     }
 

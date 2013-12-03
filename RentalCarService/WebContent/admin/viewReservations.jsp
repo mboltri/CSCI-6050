@@ -10,7 +10,14 @@
         <title>Reservations - You Drive Admin</title>
     </head>
     <body>
-        <h2>Current Reservations</h2>
+        <h2>Reservations</h2>
+        <div>
+            <form method="post" action="ModifyReservationCancellationFee">
+                The fee for cancelling a reservation within 24 hours of the start date is $
+                <input type='number' min=0 step=0.01 value='${reservationCancellationFee}' name='reservationCancellationFee'>
+                <input type='submit' value='Modify'>
+            </form>
+        </div>
         <table>
             <tr>
                 <td>Customer</td>
@@ -40,7 +47,8 @@
                         <form method="post" action="CancelReservation"  onsubmit="return confirm(
                                 'Do you really want to cancel this reservation? The customer will ' +
                                 'be charged a cancellation fee.');">
-                            <input type="hidden" name="id" value="${reservation.id}">
+                            <input type="hidden" name="reservationId" value="${reservation.id}">
+                            <input type="hidden" name="customerUsername" value="${reservation.reservationist.username}">
                             <input type="hidden" name="fee" value="true">
                             <input type="submit" value="Cancel Reservation (with fee)">
                         </form>
@@ -48,7 +56,7 @@
                     <td>
                         <form method="post" action="CancelReservation"  onsubmit="return confirm(
                         		'Do you really want to cancel this reservation?');">
-                            <input type="hidden" name="id" value="${reservation.id}">
+                            <input type="hidden" name="reservationId" value="${reservation.id}">
                             <input type="hidden" name="fee" value="false">
                             <input type="submit" value="Cancel Reservation (no fee)">
                         </form>
@@ -58,6 +66,6 @@
         </table>
         
         <br>
-        <a href="customerHome.html">Go back</a>
+        <a href="adminHome.html">Go back</a>
     </body>
 </html>

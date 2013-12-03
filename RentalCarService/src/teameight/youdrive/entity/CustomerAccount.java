@@ -83,7 +83,7 @@ public class CustomerAccount {
         balance += membershipPrice;
     }
 
-    public void addToBalance(double amount) {
+    public void assessFee(double amount) {
         balance += amount;
     }
 

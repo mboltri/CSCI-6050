@@ -23,9 +23,7 @@ function setDates() {
     
     var startTime = document.getElementById("startTime");
     startTime.value = now;
-    startTime.min = now;
     
     var endTime = document.getElementById("endTime");
     endTime.value = oneHourInFuture;
-    endTime.min = oneHourInFuture;
 }
