@@ -55,7 +55,7 @@
                 </tr>
                 <tr>
                     <td colspan="2"><input type="submit" value="Pay Balance"></td>
-                    <td colspan="2"><a href="ViewCustomerAccount">Cancel payment</a></td>
+                    <td colspan="2"><a href="accountDetails.jsp">Cancel payment</a></td>
                 </tr>
             </table>
         </form>
